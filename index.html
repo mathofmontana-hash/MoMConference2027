@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>MoM 2026 Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ╔═══════════════════════════════════════════════════════════╗
+     ║  COLOR SCHEME — transparent blend + color tint             ║
+     ║  Cards: white underlay + colored wash per event type       ║
+     ║  Dark mode toggled via button (class="dark" on html)       ║
+     ╚═══════════════════════════════════════════════════════════╝ */
+  :root {
+    /* ── Page background ── */
+    --bg: transparent;
+    --surface: #ffffff;
+    --overlay-bg: rgba(26,26,24,0.55);
+
+    /* ── Borders ── */
+    --border: rgba(80,70,55,0.25);
+    --border-light: rgba(80,70,55,0.12);
+
+    /* ── Text ── */
+    --text: #2a2520;
+    --text-secondary: #020202;
+    --text-muted: #4f4c45;
+
+    /* ── Tabs ── */
+    --tab-active: #CC0033;
+    --tab-inactive: #9a9488;
+
+    /* ── Plenary talks ── */
+    --plenary: #1b3a5c;
+    --plenary-bg: rgba(255,255,255,0.55);
+    --plenary-tint: rgba(20, 76, 135, 0.25);
+
+    /* ── Early career talks ── */
+    --early-career: #6b4f10;
+    --early-career-bg: rgba(255,255,255,0.55);
+    --early-career-tint: rgba(224, 163, 21, 0.25);
+
+    /* ── Graduate talks ── */
+    --grad-talk: #1b5c3a;
+    --grad-talk-bg: rgba(255,255,255,0.55);
+    --grad-talk-tint: rgba(22, 161, 89, 0.25);
+
+    /* ── Social / poster events ── */
+    --social: #6b3a6b;
+    --social-bg: rgba(255,255,255,0.55);
+    --social-tint: rgba(107,58,107,0.22);
+
+    /* ── Breaks & registration ── */
+    --break-bg: rgba(255,255,255,0.30);
+    --break-text: #555048;
+
+    /* ── Misc ── */
+    --accent: #CC0033;
+    --radius: 6px;
+  }
+
+  /* ══════════ DARK MODE (class-based) ══════════ */
+  html.dark {
+    --bg: #1e1d1b;
+    --surface: #2a2826;
+    --overlay-bg: rgba(0,0,0,0.65);
+
+    --border: rgba(255,255,255,0.12);
+    --border-light: rgba(255,255,255,0.07);
+
+    --text: #e8e4dc;
+    --text-secondary: #f1efea;
+    --text-muted: #c6c2ba;
+
+    --tab-active: #f06070;
+    --tab-inactive: #6b665e;
+
+    --plenary: #4e8fce;
+    --plenary-bg: rgba(255,255,255,0.06);
+    --plenary-tint: rgba(31, 115, 193, 0.2);
+
+    --early-career: #a89240;
+    --early-career-bg: rgba(255,255,255,0.06);
+    --early-career-tint: rgba(196,168,77,0.20);
+
+    --grad-talk: #7dd4a0;
+    --grad-talk-bg: rgba(255,255,255,0.06);
+    --grad-talk-tint: rgba(93,190,133,0.20);
+
+    --social: #c49ed8;
+    --social-bg: rgba(255,255,255,0.06);
+    --social-tint: rgba(168,125,190,0.18);
+
+    --break-bg: rgba(255,255,255,0.05);
+    --break-text: #a09a90;
+  }
+
+  html.dark body {
+    background: var(--bg);
+  }
+
+  /* ── Dark mode toggle button ── */
+  .theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--break-bg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 1;
+    transition: background 0.2s, border-color 0.2s;
+    z-index: 10;
+    padding: 0;
+  }
+
+  .theme-toggle:hover {
+    background: var(--border-light);
+  }
+
+  .theme-toggle .icon-sun,
+  .theme-toggle .icon-moon { pointer-events: none; }
+
+  .theme-toggle .icon-moon {
+    display: none;
+    transition: color 0.2s;
+  }
+  html.dark .theme-toggle .icon-sun {
+    display: none;
+  }
+  html.dark .theme-toggle .icon-moon {
+    display: inline;
+    color: #ffe066; /* soft yellow for moon in dark mode */
+    text-shadow: 0 0 4px #ffe06655;
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: visible;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .schedule-container {
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 16px 20px;
+  }
+
+  /* ── Tabs ── */
+  .tabs {
+    display: flex;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 0;
+  }
+
+  .tab {
+    flex: 1;
+    padding: 14px 8px 12px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--tab-inactive);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .tab:hover { color: var(--text-secondary); }
+
+  .tab.active {
+    color: var(--tab-active);
+    border-bottom-color: var(--tab-active);
+  }
+
+  .tab .tab-day {
+    display: block;
+    font-weight: 600;
+    font-size: 1.15rem;
+    line-height: 1.3;
+  }
+
+  .tab .tab-date {
+    display: block;
+    font-size: 0.92rem;
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  /* ── Day panel ── */
+  .day-panel { display: none; }
+  .day-panel.active {
+    display: block;
+    animation: fadeIn 0.25s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Schedule rows ── */
+  .schedule-row {
+    display: grid;
+    grid-template-columns: 115px 1fr;
+    border-bottom: 1px solid var(--border-light);
+    min-height: 52px;
+  }
+
+  .schedule-row:last-child { border-bottom: none; }
+
+  .time-cell {
+    padding: 14px 12px 12px 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .event-cell {
+    padding: 10px 0 10px 12px;
+    border-left: 1px solid var(--border-light);
+  }
+
+  /* ── Event cards ── */
+  .event {
+    padding: 10px 12px;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .event.clickable {
+    padding-bottom: 4px;
+  }
+
+  .event-title {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-top: 2px;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+
+  .event-speaker {
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .room-tag {
+    display: inline-block;
+    margin-top: auto;
+    padding: 2px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: transparent;
+  }
+
+  .event-plenary      .room-tag { border-color: var(--plenary); }
+  .event-early-career .room-tag { border-color: var(--early-career); }
+  .event-grad         .room-tag { border-color: var(--grad-talk); }
+  .event-social       .room-tag { border-color: var(--social); }
+
+  .event-label {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-bottom: 4px;
+  }
+
+  .label-plenary  { background: var(--plenary); color: #fff; }
+  .label-early    { background: var(--early-career); color: #fff; }
+  .label-grad     { background: var(--grad-talk); color: #fff; }
+
+  /* Type-specific styling — white underlay + color tint via stacked backgrounds */
+  .event-plenary {
+    background-color: var(--plenary-bg);
+    background-image: linear-gradient(var(--plenary-tint), var(--plenary-tint));
+    border-left: 3px solid var(--plenary);
+  }
+  .event-plenary .event-speaker { color: var(--plenary); }
+  html.dark .event-plenary .event-speaker { color: #66a5e4; }
+
+  .event-early-career {
+    background-color: var(--early-career-bg);
+    background-image: linear-gradient(var(--early-career-tint), var(--early-career-tint));
+    border-left: 3px solid var(--early-career);
+  }
+  .event-early-career .event-speaker { color: var(--early-career); }
+  html.dark .event-early-career .event-speaker { color: #ceb456; }
+
+  .event-grad {
+    background-color: var(--grad-talk-bg);
+    background-image: linear-gradient(var(--grad-talk-tint), var(--grad-talk-tint));
+    border-left: 3px solid var(--grad-talk);
+  }
+  .event-grad .event-speaker { color: var(--grad-talk); }
+
+  .event-social {
+    background-color: var(--social-bg);
+    background-image: linear-gradient(var(--social-tint), var(--social-tint));
+    border-left: 3px solid var(--social);
+  }
+  .event-social .event-speaker { color: var(--social); }
+
+  .event-break {
+    background: var(--break-bg);
+    font-weight: 500;
+    color: var(--break-text);
+    font-size: 0.95rem;
+    font-style: italic;
+  }
+
+  .event-registration {
+    background: var(--break-bg);
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .event-registration.clickable {
+    background: rgba(120, 120, 120, 0.12);
+    border-left: 3px solid var(--accent);
+    text-align: center;
+    align-items: center;
+  }
+
+  html.dark .event-registration.clickable {
+    background: rgba(255, 255, 255, 0.09);
+  }
+
+  /* ── Clickable talk cards ── */
+  .event.clickable {
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+    position: relative;
+  }
+
+  .event.clickable:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+  }
+
+  .event.clickable:active {
+    transform: translateY(0);
+  }
+
+  .event-institution {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  .parallel-5 .event-institution,
+  .parallel-6 .event-institution {
+    font-size: 0.82rem;
+    margin-top: 3px;
+  }
+
+  /* ── Parallel sessions ── */
+  .parallel-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+
+  .parallel-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+
+  .parallel-6 {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
+  }
+
+
+  .parallel-5 .event {
+    font-size: 0.88rem;
+    padding: 8px 6px 4px;
+  }
+
+  .parallel-6 .event {
+    font-size: 0.85rem;
+    padding: 7px 4px 4px;
+  }
+
+
+  .parallel-5 .event-speaker {
+    font-size: 0.88rem;
+    line-height: 1.3;
+  }
+
+  .parallel-6 .event-speaker {
+    font-size: 0.85rem;
+    line-height: 1.25;
+  }
+
+
+  .parallel-5 .event-title {
+    font-size: 0.8rem;
+  }
+
+  .parallel-6 .event-title {
+    font-size: 0.75rem;
+  }
+
+
+  .parallel-5 .room-tag {
+    font-size: 0.74rem;
+  }
+
+  .parallel-6 .room-tag {
+    font-size: 0.7rem;
+  }
+
+
+  .parallel-5 .event-label {
+    font-size: 0.62rem;
+    padding: 2px 5px;
+    margin-bottom: 2px;
+  }
+
+  .parallel-6 .event-label {
+    font-size: 0.6rem;
+    padding: 2px 4px;
+    margin-bottom: 2px;
+  }
+
+  .parallel-2 .event {
+    font-size: 0.95rem;
+  }
+
+  /* ── Section divider ── */
+  .section-divider {
+    border-bottom: 2px solid var(--border);
+    margin: 4px 0;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 16px 0 0;
+    margin-top: 8px;
+    border-top: 1px solid var(--border-light);
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ══════════════════════════════════
+     MODAL OVERLAY
+     ══════════════════════════════════ */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--overlay-bg);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center vertically */
+    padding: 24px;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .modal-card {
+    background: var(--surface);
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.08);
+    max-width: 560px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    transform: translateY(12px) scale(0.97);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .modal-overlay.active .modal-card {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-header {
+    padding: 24px 24px 0;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: var(--break-bg);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    transition: background 0.15s, color 0.15s;
+    line-height: 1;
+  }
+
+  .modal-close:hover {
+    background: var(--border);
+    color: var(--text);
+  }
+
+  .modal-header-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    margin-bottom: 8px;
+    padding-right: 40px;
+  }
+
+  .modal-type-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .modal-type-badge.plenary { background: var(--plenary); color: #fff; }
+  .modal-type-badge.early   { background: var(--grad-talk); color: #fff; }
+  .modal-type-badge.grad    { background: var(--early-career); color: #fff; }
+  .modal-type-badge.registration { background: var(--accent); color: #fff; }
+
+  .modal-title {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--text);
+    line-height: 1.35;
+    padding-right: 32px;
+  }
+
+  .modal-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+  }
+
+  .modal-meta-top {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    font-size: 0.98rem;
+    color: var(--text);
+  }
+
+  .modal-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .modal-meta-item[hidden] {
+    display: none !important;
+  }
+
+  .modal-meta-icon {
+    font-size: 0.85rem;
+    opacity: 0.6;
+  }
+
+  .modal-body {
+    padding: 16px 24px 24px;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  .modal-abstract-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .modal-abstract {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .modal-abstract p + p {
+    margin-top: 12px;
+  }
+
+  .modal-no-abstract {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ── Responsive ── */
+
+  @media (max-width: 700px) {
+    .schedule-container { padding: 12px 12px 28px; }
+
+    .schedule-row {
+      grid-template-columns: 90px 1fr;
+    }
+
+    .time-cell { font-size: 0.85rem; padding-right: 8px; }
+
+    .parallel-5 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .parallel-6 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .tab .tab-day { font-size: 1rem; }
+    .tab .tab-date { font-size: 0.82rem; }
+
+    .modal-card {
+      max-width: 100%;
+      max-height: 96vh;
+      overflow-y: auto;
+    }
+    .modal-title { font-size: 1.15rem; }
+  }
+
+
+  @media (max-width: 520px) {
+    body { font-size: 15px; }
+
+    .schedule-container { padding: 6px 6px 20px; }
+
+    .schedule-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .time-cell {
+      text-align: left;
+      padding: 10px 8px 2px 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border-bottom: none;
+    }
+
+    .event-cell {
+      padding: 4px 8px 10px 8px;
+      border-left: none;
+    }
+
+    .parallel-5 {
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+    .parallel-6 {
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+
+    .parallel-5 .event {
+      font-size: 0.88rem;
+      padding: 8px 10px 4px;
+    }
+    .parallel-6 .event {
+      font-size: 0.85rem;
+      padding: 8px 10px 4px;
+    }
+
+    .parallel-5 .event-speaker { font-size: 0.88rem; }
+    .parallel-5 .event-title { font-size: 0.82rem; }
+    .parallel-5 .room-tag { font-size: 0.76rem; }
+    .parallel-6 .event-speaker { font-size: 0.85rem; }
+    .parallel-6 .event-title { font-size: 0.80rem; }
+    .parallel-6 .room-tag { font-size: 0.74rem; }
+
+    .parallel-2 {
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+
+    .tab { padding: 10px 4px 8px; }
+    .tab .tab-day { font-size: 0.92rem; }
+    .tab .tab-date { font-size: 0.76rem; }
+
+    .legend { gap: 10px; }
+    .legend-item { font-size: 0.8rem; }
+
+    .modal-overlay { padding: 8px; }
+    .modal-header { padding: 18px 18px 0; }
+    .modal-body { padding: 12px 18px 18px; }
+    .modal-title { font-size: 1.05rem; }
+  }
+
+  html.print-mode .theme-toggle,
+  html.print-mode .tabs {
+    display: none;
+  }
+
+  html.print-mode .schedule-container {
+    max-width: 980px;
+    padding-top: 8px;
+  }
+
+  @media print {
+    .theme-toggle,
+    .tabs,
+    .modal-overlay {
+      display: none !important;
+    }
+
+    .day-panel {
+      display: none !important;
+      animation: none !important;
+    }
+
+    .day-panel.active {
+      display: block !important;
+    }
+
+    body {
+      background: #fff !important;
+      color: #000 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .schedule-container {
+      max-width: none;
+      padding: 0;
+    }
+
+    .schedule-row,
+    .event,
+    .event-cell,
+    .time-cell {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .event.clickable:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="schedule-container" style="position:relative">
+
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+    <span class="icon-sun">&#9788;</span>
+    <span class="icon-moon">&#9790;</span>
+  </button>
+
+  <nav class="tabs" role="tablist">
+    <!--<button class="tab active" role="tab" data-day="friday" aria-selected="true">
+      <span class="tab-day">Friday</span>
+      <span class="tab-date">April 24</span>
+    </button>-->
+    <button class="tab active" role="tab" data-day="saturday" aria-selected="false">
+      <span class="tab-day">Saturday</span>
+      <span class="tab-date">October 10</span>
+    </button>
+    <button class="tab" role="tab" data-day="sunday" aria-selected="false">
+      <span class="tab-day">Sunday</span>
+      <span class="tab-date">October 11</span>
+    </button>
+  </nav>
+
+  <!--
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  HOW TO ADD ABSTRACTS                                       ║
+    ║                                                              ║
+    ║  Each clickable .event has data attributes:                  ║
+    ║    data-title       = talk title (shown in modal header)     ║
+    ║    data-speaker     = speaker name                           ║
+    ║    data-institution = speaker's institution (cell + modal)   ║
+    ║    data-room        = room                                   ║
+    ║    data-time        = time slot                              ║
+    ║    data-type        = "plenary" | "early" | "grad"           ║
+    ║    data-abstract    = abstract text (supports <p> tags)      ║
+    ║                                                              ║
+    ║  Fill in data-institution and data-abstract per .event.      ║
+    ╚══════════════════════════════════════════════════════════════╝
+  -->
+
+  <!-- ════════════ FRIDAY ════════════ -->
+  <!--<div class="day-panel" id="friday">
+
+    <div class="schedule-row">
+      <div class="time-cell">3:00 – 4:00</div>
+      <div class="event-cell">
+        <div class="event event-registration clickable"
+             data-title="Registration"
+             data-room="Upper entrance of ABW-2125"
+             data-time="3:00 – 4:00 PM · Friday"
+             data-type="registration"
+             data-abstract="<p>Registration will be in front of the upper entrance of ABW-2125.</p><p>ABW-2125 is two floors up from the ground floor. From the ground floor, head up two floors and look for the upper entrance area outside the room. Alternatively, if you enter through the lower entrance of the room itself, you can take the interior stairs to come out on the upper side. You will find your name tag and additional information at the registration table!</p><p><a href='https://maps.app.goo.gl/9hHiFLE5bgYp4826A' target='_blank' rel='noopener noreferrer'>Location</a></p>">Registration in front of the upper entrance of ABW-2125<br>(click for more details...)</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="time-cell">4:00 – 5:00</div>
+      <div class="event-cell">
+        <div class="event event-plenary clickable"
+             data-title="Complexity-One Four-Manifolds"
+             data-speaker="Tara Holm"
+             data-room="ABW-2125"
+             data-time="4:00 – 5:00 PM · Friday"
+             data-type="plenary"
+             data-institution="Cornell University" 
+             data-abstract="In this talk, we will explore the relationship between the geometry and topology of a complexity-one four-manifold and the combinatorial data that encode it.  This will provide an opportunity to explore the properties of momentum maps, a key tool in symplectic geometry.  We use it to deduce a generators-and-relations description for the even part of the equivariant cohomology of the manifold and then explore what geometric aspects the equivariant cohomology determines. The talk will not assume any background in symplectic geometry and will be driven by specific examples and pictures. It is based on joint work with Liat Kessler and Susan Tolman.">
+          <span class="event-label label-plenary">Plenary</span>
+          <div class="event-speaker">Tara Holm</div>
+          <div class="event-title">Complexity-One Four-Manifolds</div>
+          <span class="room-tag">ABW-2125</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="time-cell">5:00 – 5:30</div>
+      <div class="event-cell">
+        <div class="event event-break">Break</div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="time-cell">5:30 – 6:30</div>
+      <div class="event-cell">
+        <div class="parallel-2">
+          <div class="event event-early-career clickable"
+               data-title="Diffeomorphisms of 4-Manifolds and Seiberg&dash;Witten Theory"
+               data-speaker="Juan Muñoz-Echániz"
+               data-room="ABW-2125"
+               data-time="5:30 – 6:30 PM · Friday"
+               data-type="early"
+               data-institution="Simons Center for Geometry and Physics" 
+               data-abstract="Seiberg--Witten theory provides powerful invariants of smooth 4-manifolds, and it can also be used to study self-diffeomorphisms of 4-manifolds. In this talk, I will describe recent techniques in this direction. More specifically, I will explain how, in certain situations, the Seiberg--Witten moduli spaces associated to diffeomorphisms are stably framed. I will then discuss applications of this idea to the study of products of Dehn twists along smoothly embedded or Lagrangian 2-spheres in smooth and symplectic 4-manifolds. This is based on joint work with Konno, Lin, and Mukherjee.">
+            <span class="event-label label-early">Expository</span>
+            <div class="event-speaker">Juan Muñoz-Echániz</div>
+            <div class="event-title">Diffeomorphisms of 4-Manifolds and Seiberg&dash;Witten Theory</div>
+            <span class="room-tag">ABW-2125</span>
+          </div>
+          <div class="event event-early-career clickable"
+               data-title="Satellite Operators on Knot Concordance"
+               data-speaker="Allison Miller"
+               data-room="ABW-2160"
+               data-time="5:30 – 6:30 PM · Friday"
+               data-type="early"
+               data-institution="Swarthmore College" 
+               data-abstract="The classical satellite operation descends to give well-defined and much-studied self maps of the set of knots modulo smooth concordance. I'll survey what's known about these maps from a variety of perspectives (When are these maps injective and/or surjective? How do these maps change the 4-dimensional complexity of a knot?), before focusing on recent progress towards Hedden's 2016 conjecture on satellite-induced homomorphisms of the knot concordance group.">
+            <span class="event-label label-early">Expository</span>
+            <div class="event-speaker">Allison Miller</div>
+            <div class="event-title">Satellite Operators on Knot Concordance</div>
+            <span class="room-tag">ABW-2160</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>--><!-- /friday -->
+
+  <!-- ════════════ SATURDAY ════════════ -->
+  <div class="day-panel active" id="saturday">
+
+    <div class="schedule-row">
+      <div class="time-cell">11:00 – 12:00</div>
+      <div class="event-cell">
+        <div class="event event-registration clickable"
+             data-title="Registration"
+             data-room="Wilson Hall outside of 1-132"
+             data-time="11:00 – 12:00 PM · Saturday"
+             data-type="registration"
+             data-abstract="<p>Registration will be in front of the plenary room, Wilson 1-132</p><p>Wilson 1-132 is on the ground floor in the Northeast corner of Wilson Hall. You will find your name tag and additional information at the registration table!</p><p><a href='https://maps.app.goo.gl/nvXbzTiVK35A5LAd7' target='_blank' rel='noopener noreferrer'>Location</a></p>">Registration is in front of the plenary room; Wilson 1-132<br>(click for more details...)</div>
+      </div>
+    </div>
+
+    <!-- Plenary 1 -->
+    <div class="schedule-row">
+      <div class="time-cell">12:00 – 12:50</div>
+      <div class="event-cell">
+        <div class="event event-plenary clickable"
+             data-title="Kleinian groups and hyperbolic knots"
+             data-speaker="Eric Chesebro"
+             data-room="Wilson 1-132"
+             data-time="12:00 – 12:50 PM · Saturday"
+             data-type="plenary"
+             data-institution="University of Montana" 
+             data-abstract="Kleinian groups, first studied by Felix Klein and Henri Poincaré in the late 19th century, are discrete groups of isometries of hyperbolic 3-space. Since then, they’ve become central objects in mathematics, with deep connections to fields including number theory, complex analysis, and geometric topology.  In the 1970's, work of Robert Riley and Bill Thurston made us realize that the separate fields of 3-dimensional topology and Kleinian groups were intimately related.  In this talk, I’ll introduce Kleinian groups and try to draw the connection to knot theory and topology.">
+          <span class="event-label label-plenary">Plenary</span>
+          <div class="event-speaker">Eric Chesebro</div>
+          <div class="event-title">Kleinian groups and hyperbolic knots</div>
+          <span class="room-tag">Wilson 1-132</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Graduate Talks 1 -->
+    <div class="schedule-row">
+      <div class="time-cell">1:10 – 1:30</div>
+      <div class="event-cell">
+        <div class="parallel-2">
+          <div class='event event-early-career clickable' data-title='Chain Theorems on 3-connect d graphs.' data-speaker='Avin Sunuwar' data-room='Wilson 1-123' data-time='1:10 - 1:30 PM' data-type='grad' data-institution='MSU-Billings' data-abstract='Chain theorems provide a pathway in constructing and analyzing families of graphs. In this talk, we explore improvements in chain theorems for 3-connected graphs and their subclasses. We discuss an improved version of Tutte’s Wheel Theorem, which enhances algorithmic efficiency by limiting the construction process to extensions of the wheel $W_4$ with restricted operations.'>
+            <span class='event-label label-early'>Original Research</span>
+            <div class='event-speaker'>Avin Sunuwar</div>
+            <div class='event-title'>Chain Theorems on 3-connected graphs.</div>
+            <span class='room-tag'>Wilson 1-123</span>
+          </div>
+         <div class='event event-grad clickable' data-title='Periodic Point Sets and their Motifs' data-speaker='Nathan Dutzi' data-room='Wilson 1-122' data-time='1:10 - 1:30 PM' data-type='early' data-institution='Montana Technological University' data-abstract='A Periodic Point Set (PPS) consists of a basic set of points, called a motif, which then replace each point in some underlying lattice. We will introduce notions of distance between periodic point sets and explore properties of the metric spaces these create. This exploration will consider examples as additional conditions are placed on the periodic point sets in these spaces. We will provide a sequence of geometric examples that show the unboundedness of these metric spaces. This is joint work with Michael Bruner and Atish Mitra.'>
+            <span class='event-label label-grad'>Expository</span>
+            <div class='event-speaker'>Nathan Dutzi</div>
+            <div class='event-title'>Periodic Point Sets and their Motifs</div>
+            <span class='room-tag'>Wilson 1-122</span>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Graduate Talks 2 -->
+    <div class="schedule-row">
+      <div class="time-cell">1:40 – 2:00</div>
+      <div class="event-cell">
+        <div class="parallel-2">
+          <div class='event event-grad clickable' data-title='When the Cartesian product of Hamiltonian cycles is Hamiltonian' data-speaker='Alexander Goldman' data-room='Wilson 1-123' data-time='1:40 - 2:00 PM' data-type='early' data-institution='University of Montana' data-abstract='This talk is an expository talk on results given by Trotter and Erdös in their 1978 paper about Cartesian products of directed cycles. We proof the reverse direction of main result, and show that if a Cartesian product of directed cycles $C_{(n1)},C_{(n2)}$ is hamiltonian, then $gcd (n1,n2)\geq 2$ and there exists integers $d1,d2$ such that $d1+d2=gcd(n1,n2)$ and $gcd(n1,d1)=gcd(n2,d2)=1$.'>
+            <span class='event-label label-grad'>Expository</span>
+            <div class='event-speaker'>Alexander Goldman</div>
+            <div class='event-title'>When the Cartesian product of Hamiltonian cycles is Hamiltonian</div>
+            <span class='room-tag'>Wilson 1-123</span>
+          </div>
+         <div class='event event-early-career clickable' data-title='The Ulterior Motifs of Periodic Point Sets.' data-speaker='Michael Bruner' data-room='Wilson 1-122' data-time='3:30 - 3:50 PM' data-type='grad' data-institution='UMT' data-abstract='Towards resolving a question posed by Garber, Virk, and Zava about the coarse embeddability of Periodic Point Sets in Hilbert Spaces, we will describe a construction to realize a coarse disjoint union of a sequence of metric spaces as a family of Periodic Point Sets with controlled covering and packing radius. This construction will make use of two key ideas. First, we will describe a construction called a “dial” that encapsulates a common technique in embeddability results. Second, we will describe a technique of using these dials to adjust a “base motif” in several steps to construct a family of “ulterior motifs” which makes the embedding possible.'>
+            <span class='event-label label-early'>Original Research</span>
+            <div class='event-speaker'>Michael Bruner</div>
+            <div class='event-title'>The Ulterior Motifs of Periodic Point Sets (Michael Bruner).</div>
+            <span class='room-tag'>Wilson 1-122</span>
+          </div> 
+        </div>
+      </div>
+    </div>
+
+    <!-- Graduate Talks 3 -->
+    <div class="schedule-row">
+      <div class="time-cell">2:10 – 2:30</div>
+      <div class="event-cell">
+        <div class="parallel-2">
+          <div class='event event-early-career clickable' data-title='A Colorful Characterization of Size 2 Orbits of Plane Partitions under Rowmotion' data-speaker='Colin Davis' data-room='Wilson 1-123' data-time='2:10 - 2:30 PM' data-type='grad' data-institution='University of Montana' data-abstract='We examine the action of rowmotion on the set of plane partitions within an $a\times b\times c$ bounding box. In particular, using a coloring of the points in the bounding box, we see that the structure of plane partitions in orbits of size 2 hide a striking pattern. We use this pattern to establish a bijection to lozenge tilings of a hexagon with dimensions corresponding to that of the bounding box. Finally, this bijection allows us to completely characterize the orbits of size 2, and lets us count them using MacMahon&#39;s Box Formula.'>
+            <span class='event-label label-early'>Original Research</span>
+            <div class='event-speaker'>Colin Davis</div>
+            <div class='event-title'>A Colorful Characterization of Size 2 Orbits of Plane Partitions under Rowmotion</div>
+            <span class='room-tag'>Wilson 1-123</span>
+          </div>
+         <div class='event event-early-career clickable' data-title='Concordance Bicategories and Satellites ' data-speaker='Chris Boehlert' data-room='Wilson 1-122' data-time='2:10 - 2:30 PM' data-type='grad' data-institution='Montana State University' data-abstract='The notion of knot concordance defines an equivalence relation on the set of knots. Under connect sum the set of concordances classes of knots form an abelian group which, despite dating back nearly 60 years, is still not well understood. One classical approach to studying the knot concordance group is via the satellite operation on knots (also not fully understood), which produce new knots by tracing one knot with another. These operations can be codified as the action of the monoid of satellite patterns on the set of knot concordance classes. Rather than studying sets of equivalence classes, we can categorify the whole situation producing concordance bicategories which retain information about the specific concordances between knots. In this talk I will briefly discuss the standard concordance bicategory and show how one of its variants can be used to categorify the satellite action on knots.'>
+            <span class='event-label label-early'>Original Research</span>
+            <div class='event-speaker'>Chris Boehlert</div>
+            <div class='event-title'>Concordance Bicategories and Satellites </div>
+            <span class='room-tag'>Wilson 1-122</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="time-cell">2:30 – 3:00</div>
+      <div class="event-cell">
+        <div class="event event-break">Coffee Break</div>
+      </div>
+    </div>
+
+    <!-- Graduate Talks 4 -->
+    <div class="schedule-row">
+      <div class="time-cell">3:00 – 3:20</div>
+      <div class="event-cell">
+        <div class="parallel-2">
+          <div class='event event-early-career clickable' data-title='Rank Detectability in Higher-Order Networks: Squarefree Catalecticants for k-Uniform Hypergraph Adjacency Tensors' data-speaker='Tadeo Aviles Zuniga' data-room='Wilson 1-123' data-time='3:00 - 3:20 PM' data-type='grad' data-institution='Montana State University' data-abstract='Tensor rank quantifies latent structure in higher-order data, including communities in hypergraphs, interacting sources in higher-order statistics, and effective components in tensorized learning models. Because CP rank is NP-hard and decomposition algorithms often require the rank as an input, a practical alternative is rank detectability, which asks when rank can be certified from the matrix rank of an unfolding. In hypergraphs, cumulants, higher-order spectra, and tensorized architectures, the component count is often needed before decomposition, while the tensor representation may not be able to certify the proposed rank. Calvi, Scalzo Dees, and Mandic showed that, for generic tensors, the maximally square unfolding certifies CP rank below the ceiling $n^{(floor(k/2))} − 1$. The hypergraph adjacency tensors considered here are invariant under permutations, vanish on repeated indices, and occupy a sparse squarefree coordinate subspace. These constraints break the generic independence behind the ambient Khatri–Rao ceiling, so at order four the generic ceiling predicts a detectable range larger than the unfolding can actually certify.<br><br>This mismatch comes from symmetry. For a supersymmetric tensor, the maximally square unfolding coincides, up to nonsingular diagonal scaling, with the middle catalecticant. Classical catalecticant theory bounds this matrix by the Veronese span rather than by the full Khatri–Rao ambient dimension, giving the smaller ceiling $R_{sym}(n,k) = C(n + floor(k/2) − 1$, $floor(k/2)) − 1$, where $C(a,b)$ denotes “a choose b.” This replaces the generic ceiling $n^{(floor(k/2))} − 1$. The catalecticant rank bound itself is classical. The contribution here is to place that bound inside the maximally square detectability framework and to identify the additional squarefree structure imposed by hypergraph adjacency tensors.<br><br>For a simple k-uniform hypergraph, repeated-index entries vanish. Its catalecticant is supported on the squarefree subspace of dimension $C(n, floor(k/2))$, where it decomposes hyperedge by hyperedge into complementary-pairing blocks. Each block is a permutation matrix on the balanced splits of one hyperedge, is indefinite in general, and gives a sparse assembly rule that avoids forming the dense tensor. This yields SymMaxSquare, a symmetry-reduced rank estimator that is exact in the generic detectable regime and returns a certified unfolding-rank lower bound, with a saturation diagnostic, on structured hypergraph data. A Schwartz–Zippel variant certifies the generic rank obtained after assigning independent random weights to the same hyperedge support, and a Kronecker factorization result gives a factor-wise rank-estimation layer for Kronecker hypergraphs.<br><br>Across more than 7,000 completed configurations, SymMaxSquare exhibits a sharp phase transition at the predicted ceiling, exact detection below threshold on generic instances, and a 7–9× speedup over the uncompressed unfolding at order four once n is large enough for asymptotic cost to dominate. On real hypergraph tensors, it returns stable interior unfolding-rank lower bounds when a spectral gap is present and reports saturation when the ceiling is reached. Together, these outputs extend rank detectability from a generic-tensor certificate to a practical test for structured higher-order data, while pointing toward support-specific exactness, sparse full-scale hypergraphs, Kronecker structure, and the statistical limits of recoverability.'>
+            <span class='event-label label-early'>Original Research</span>
+            <div class='event-speaker'>Tadeo Aviles Zuniga</div>
+            <div class='event-title'>Rank Detectability in Higher-Order Networks: Squarefree Catalecticants for k-Uniform Hypergraph Adjacency Tensors</div>
+            <span class='room-tag'>Wilson 1-123</span>
+          </div>
+          <div class='event event-grad clickable' data-title='Stone Dictionary' data-speaker='Joshua Colahan' data-room='Wilson 1-122' data-time='1:40 - 2:00 PM' data-type='early' data-institution='MSU' data-abstract='An introduction to the strategy of translating familiar operations between topology, logic, order theory, and category theory. We will discuss two useful adjunctions codifying these ideas. First, the Stone duality used in pointfree topology, which provides an equivalence between the categories of sober topological spaces and spatial locales. Second, localic reflection of Grothendieck topoi, which we can interpret as building a space that remembers the truth values of a given topos. '>
+            <span class='event-label label-grad'>Expository</span>
+            <div class='event-speaker'>Joshua Colahan</div>
+            <div class='event-title'>Stone Dictionary</div>
+            <span class='room-tag'>Wilson 1-122</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Graduate Talks 5 -->
+    <div class="schedule-row">
+      <div class="time-cell">3:30 – 3:50</div>
+      <div class="event-cell">
+        <div class="parallel-2">
+         <div class='event event-grad clickable' data-title='Modern Generative Modeling Paradigms' data-speaker='Jack Ruder' data-room='Wilson 1-123' data-time='11:00 - 11:20 AM' data-type='early' data-institution='MSU Bozeman' data-abstract='Generative modeling asks to produce samples generated from an arbitrary probability distribution. The recent explosive success of generative modeling as attributed to diffusion models, which generate samples by numerically integrating a stochastic differential equation. Followup work in the past five years has generalized and improved upon the diffusion framework, including flow-matching, flow maps, and consistency models, of which the latter two methods aim to approximate the numerical integration solution in order to speed up sampling. More recently, drifting models have been proposed as a new paradigm which sidesteps the numerical integration completely while retaining state-of-the-art generation quality. This talk will introduce the concept of generative modeling, as well as provide an introduction to diffusion and flow matching. We will see how to equate diffusion and flow matching, and then introduce drifting as a solution to shortcomings of diffusion and flow. Lastly, we will briefly explore some of the interpretations of drifting including a link to diffusion modeling.'>
+            <span class='event-label label-grad'>Expository</span>
+            <div class='event-speaker'>Jack Ruder</div>
+            <div class='event-title'>Modern Generative Modeling Paradigms</div>
+            <span class='room-tag'>Wilson 1-123</span>
+          </div> 
+         <div class='event event-early-career clickable' data-title='Derived Turaev-Viro ' data-speaker='Alexandra Ballow' data-room='Wilson 1-122' data-time='3:00 - 3:20 PM' data-type='grad' data-institution='Montana State University' data-abstract='We aim to integrate a 2-category over a (framed) surface: this is a purely combinatorial implementation of factorization homology. We will discuss intuitively what factorization homology is, focusing  first on a combinatorial definition of factorization homology over the circle. This example is interesting in its own right as a generalized Hochschild homology. To extend this definition to surfaces, we define 2-dimensional quivers and consider representations of such in a 2-category.  We finish with a discussion of string-nets to motivate the correspondence between factorization homology of a surface and a version of the TQFT Turaev-Viro on surfaces. '>
+            <span class='event-label label-early'>Original Research</span>
+            <div class='event-speaker'>Alexandra Ballow</div>
+            <div class='event-title'>Derived Turaev-Viro </div>
+            <div class='event-speaker', style="text-decoration: line-through;">Lucus Brady</div>
+            <div class='event-title', style="text-decoration: line-through;">Hilbert Modules and Quantum Reference Frames  </div>
+            <span class='room-tag'>Wilson 1-122</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plenary 2 -->
+    <div class="schedule-row">
+      <div class="time-cell">4:10 – 5:00</div>
+      <div class="event-cell">
+        <div class="event event-plenary clickable"
+             data-title="Self-similar sets and Lipschitz curves"
+             data-speaker="Blair Davey"
+             data-room="Wilson 1-132"
+             data-time="4:10 - 5:00 PM · Saturday"
+             data-type="plenary"
+             data-institution="Montana State University" 
+             data-abstract="After introducing Hausdorff measure and Hausdorff dimension, we examine the notion of rectifiability and what it means for a set to be purely unrectifiable.  In particular, if E is a purely unrectifiable 1-set in the plane, then the intersection of E with any Lipschitz graph has zero 1-dimensional Hausdorff measure. This leads to a natural question: Given a purely unrectifiable 1-set, can we find a Lipschitz curve for which the intersection with E is non-trivial in some dimension less than 1? Going further, how close to 1 can we get? We discuss the answer to this question for self-similar sets. This talk covers joint work with Silvia Ghinassi and Bobby Wilson.
+">
+          <span class="event-label label-plenary">Plenary</span>
+          <div class="event-speaker">Blair Davey</div>
+          <div class="event-title">Self-similar sets and Lipschitz curves</div>
+          <span class="room-tag">Wilson 1-132</span>
+        </div>
+      </div>
+    </div>
+   <div class="schedule-row">
+      <div class="time-cell">5:00 – 6:00</div>
+      <div class="event-cell">
+        <div class="event event-registration clickable"
+             data-title="Board Games"
+             data-room="Wilson Hall 1-119"
+             data-time="5:00 – 6:00 PM · Saturday"
+             data-type="games"
+             data-abstract="Board games will be provided. Please feel free to bring your own.">Board Games!<br>(click for more details...)
+        <span class="room-tag">Wilson 1-119</span>
+      </div>
+    </div>
+</div>
+
+  </div><!-- /saturday -->
+
+  <!-- ════════════ SUNDAY ════════════ -->
+  <div class="day-panel" id="sunday">
+
+    <!-- Graduate Talks 7 -->
+    <div class="schedule-row">
+      <div class="time-cell">9:30 – 9:50</div>
+      <div class="event-cell">
+        <div class="parallel-2">
+          <div class='event event-early-career clickable' data-title='Quantitative Unique Continuation for a General Class of Schr&ouml;dinger Equations' data-speaker='Ahsan Ali' data-room='Wilson 1-123' data-time='9:30 - 9:50 AM' data-type='grad' data-institution='Montana State University' data-abstract='Unique continuation for the Schr&ouml;dinger equation is a classical question and its quantified version yields a stronger statement which has gained more traction in recent years. In this talk, I will state my results on the quantitative unique continuation of the Schr&ouml;dinger equation with a $W^{1,p}$ potential for $\frac{n}{2} \leq p \leq \infty$. Previous results are known for $L^{\infty}$ potentials and $W^{1,\infty}$ potentials so my result will be an interpolation of these (sort of). I will give a brief overview of the history of the problem, then share where my result can be placed in the literature and lastly, (if time permits) briefly go over the techniques used. '>
+            <span class='event-label label-early'>Original Research</span>
+            <div class='event-speaker'>Ahsan Ali</div>
+            <div class='event-title'>Quantitative Unique Continuation for a General Class of Schr&ouml;dinger Equations</div>
+            <span class='room-tag'>Wilson 1-123</span>
+          </div>
+          <div class='event event-grad clickable' data-title='The Étale Fundamental Group' data-speaker='Jonathan Stroh-Pal' data-room='Wilson 1-122' data-time='11:30 - 11:50 PM' data-type='early' data-institution='Montana State University' data-abstract='In this talk, I will describe the construction of the étale fundamental group of a scheme and relate it to the Galois theory of fields and of topological covering spaces.'>
+            <span class='event-label label-grad'>Expository</span>
+            <div class='event-speaker'>Jonathan Stroh-Pal</div>
+            <div class='event-title'>The Étale Fundamental Group</div>
+            <span class='room-tag'>Wilson 1-122</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Graduate Talks 8 -->
+    <div class="schedule-row">
+      <div class="time-cell">10:00 – 10:20</div>
+      <div class="event-cell">
+        <div class="parallel-2">
+          <div class='event event-early-career clickable' data-title='Existence and Nonexistence of Group-Invariant Maps from Spheres into Hyperquadrics' data-speaker='Eden Danielsen-Jensen' data-room='Wilson 1-123' data-time='10:00 - 10:20 AM' data-type='grad' data-institution='Brigham Young University' data-abstract='We study monomial mappings that send the unit sphere in $\mathbb{C}^2$ into a hyperquadric in $\mathbb{C}^N$ and are invariant under a finite subgroup $\Gamma$ of the unitary group $U(2)$. Our focus is on determining the possible target ranks and signatures of such maps. While group-invariant mappings from spheres to spheres have been extensively studied, less is known when the target is allowed to be a hyperquadric. We relate the existence of these maps to the coefficients of $\Gamma$-invariant polynomials and focus on the subgroup $\Gamma=\left\langle\begin{bmatrix}\omega & 0\\0 & \omega^2\end{bmatrix}\right\rangle,$ where $\omega$ is a primitive $p$th root of unity and $p$ is odd. For this family, we construct invariant monomial maps realizing broad families of target signatures, including all signatures in a region beyond an explicit threshold. We also establish a region where no nonconstant hyperquadric target is possible. Together, these results begin to describe the boundary between attainable and unattainable target signatures and provide progress toward understanding rank stability for group-invariant maps into hyperquadrics.'>
+            <span class='event-label label-early'>Original Research</span>
+            <div class='event-speaker'>Eden Danielsen-Jensen</div>
+            <div class='event-title'>Existence and Nonexistence of Group-Invariant Maps from Spheres into Hyperquadrics</div>
+            <span class='room-tag'>Wilson 1-123</span>
+          </div>
+          <div class='event event-grad clickable' data-title='Doing Higher Category Theory with Computers: A Demo of the rzk Proof Assistant' data-speaker='Judah Towery' data-room='Wilson 1-122' data-time='10:00 - 10:20 AM' data-type='early' data-institution='Montana State University' data-abstract='Rzk is a new proof assistant that implements simplicial type theory as defined by Riehl-Schulman. The basic types in this system are bisimplicial spaces that can be endowed with a segal (pre-$(\infty, -1)$-category) or rezk ($(\infty, 1)$-category) structure. We can then make  categorical or functorial constructions on these types. In this talk, I will do an interactive demonstration of these categorical and functorial features, and show how axioms of a category follow as theorems from the segal condition and how functoriality follows as a theorem from a hom structure on these types.'>
+           <span class='event-label label-grad'>Expository</span>
+           <div class='event-speaker'>Judah Towery</div>
+           <div class='event-title'>Doing Higher Category Theory with Computers: A Demo of the rzk Proof Assistant</div>
+           <span class='room-tag'>Wilson 1-122</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="schedule-row">
+      <div class="time-cell">10:20 – 11:00</div>
+      <div class="event-cell">
+        <div class="event event-break">Coffe Break</div>
+      </div>
+    </div>    
+
+    <!-- Graduate Talks 9 -->
+    <div class="schedule-row">
+      <div class="time-cell">11:00 – 11:20</div>
+      <div class="event-cell">
+        <div class="parallel-2">
+         <div class='event event-grad clickable' data-title=' Sturm-Liouville Theory and its Application' data-speaker='Matthew Helmer' data-room='Wilson 1-123' data-time='3:30 - 3:50 PM' data-type='early' data-institution='Montana State University' data-abstract='We learn in elementary calculus that it is possible to express a “well-behaved” function f as an infinite series known as the Taylor series, a sum of powers of x. In similar fashion, it is possible to express a well-behaved f as an infinite series constructed from other sets of functions, and these expressions have different applications depending on the sets of functions utilized. For instance, we can use a Fourier series to build a function using sine waves, and this was originally utilized in order to solve the heat equation, the differential equation modeling heat flow. The sets of functions that can be used for such constructions are special, and while all of these sets of functions may appear different from one another, there is a general framework called Sturm-Liouville theory that unites them all and describes the conditions placed upon each set. We will discuss this framework, and along the way, we will discuss what it means for a set of functions to be orthogonal and complete.'>
+            <span class='event-label label-grad'>Expository</span>
+            <div class='event-speaker'>Matthew Helmer</div>
+            <div class='event-title'> Sturm-Liouville Theory and its Application</div>
+            <span class='room-tag'>Wilson 1-123</span>
+          </div>
+          <div class='event event-early-career clickable' data-title='Achievable Ranks of Certain Monomial Sphere Maps' data-speaker='Shogo Starr' data-room='Wilson 1-122' data-time='11:00 - 11:20 AM' data-type='grad' data-institution='BYU' data-abstract='A topic of interest in the field of complex analysis is the study of rational functions between complex spheres. In particular, given a complex sphere of fixed dimension, it is unknown in general when we can guarantee the existence of a monomial sphere map to a complex sphere of higher dimension. I will discuss how, if we require our maps to have certain symmetrical properties, this question can instead be thought of as a question about real polynomials, or also as a geometric question about points on a real lattice. I will then show some of the results that can be proven using these interpretations about which target dimensions can and cannot be achieved.'>
+            <span class='event-label label-early'>Original Research</span>
+            <div class='event-speaker'>Shogo Starr</div>
+            <div class='event-title'>Achievable Ranks of Certain Monomial Sphere Maps</div>
+            <span class='room-tag'>Wilson 1-122</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Graduate Talks 10 -->
+    <div class="schedule-row">
+      <div class="time-cell">11:30 – 11:50</div>
+      <div class="event-cell">
+        <div class="parallel-2">
+          <div class='event event-grad clickable' data-title='Choose Your Own Adventure (Quantization Edition)' data-speaker='Grace Stroh-Pal' data-room='Wilson 1-123' data-time='11:30 - 11:50 AM' data-type='early' data-institution='Montana State' data-abstract='Quantization is usually presented as a single transformation from classical to quantum mechanics. In practice, however, it is a family of distinct procedures—Weyl/Moyal quantization, geometric quantization, and deformation quantization, to name a few—that need not agree with one another. This talk seeks to explain why there are so many different versions of quantization. We will explore the purpose of quantization, the unique niches that each version fulfills, and whether a refined correspondence principle could narrow the choices for quantization in specific settings, even though a fully universal choice has been proven to be impossible.'>
+            <span class='event-label label-grad'>Expository</span>
+            <div class='event-speaker'>Grace Stroh-Pal</div>
+            <div class='event-title'>Choose Your Own Adventure (Quantization Edition)</div>
+            <span class='room-tag'>Wilson 1-123</span>
+          </div>
+          <div class='event event-early-career clickable' data-title='Unifying Closures and Hygienic Macros' data-speaker='Jack Phillips' data-room='Wilson 1-122' data-time='9:30 - 9:50 AM' data-type='grad' data-institution='University of Montana' data-abstract='A closure is a first-class function that captures variables from the surrounding lexical environment. A hygienic macro is a compile-time function that generates code preserving the intended binding structure of the program. Traditionally, these features have been treated as semantically distinct, and the formalization of hygienic macros has been obscured by low-level machinery. This talk presents a novel unification by decomposing closures and macros into a small set of atomic primitives. Within this decomposition, hygiene emerges as a consequence of composing these primitives, which makes it a derived property rather than a primitive one.<br><br>More broadly, this talk discusses the process of simplifying and decomposing formal structures into more atomic primitives through the lens of programming languages. The ultimate goal is to achieve a deeper understanding of the relationships between the components of a formal system, in this case closures and hygienic macros. The difficulty lies in preserving the meaning of the original system and ensuring that the resulting primitives are simpler, more orthogonal, and more composable. No background in the theory of programming languages is assumed.'>
+            <span class='event-label label-early'>Original Research</span>
+            <div class='event-speaker'>Jack Phillips</div>
+            <div class='event-title'>Unifying Closures and Hygienic Macros</div>
+            <span class='room-tag'>Wilson 1-122</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plenary 3 -->
+    <div class="schedule-row">
+      <div class="time-cell">12:10 – 1:00</div>
+      <div class="event-cell">
+        <div class="event event-plenary clickable"
+             data-title="Recovering Shapes from Their Shadows"
+             data-speaker="Atish Mitra"
+             data-room="Wilson 1-132"
+             data-time="12:10 – 1:00 PM · Sunday"
+             data-type="plenary"
+             data-institution="Montana Technological University" data-abstract="Given a finite set of points sampled from an unknown shape, how much of the shape can one recover – topologically and geometrically? A standard answer in topological data analysis is the Vietoris–Rips complex: declare a collection of sample points to be a simplex whenever they are mutually close. This is easy to build and often recovers the homotopy type of the shape, but it is an abstract complex – it does not sit inside the space the data came from. However, its <q>shadow</q> does: taking the union of the convex hulls of all the simplices gives an honest subset of Euclidean space, a candidate geometric reconstruction rather than just a topological one.<br><br>The natural projection from the complex onto its shadow can be badly behaved, and has been understood only in low ambient dimensions. I will explain what goes wrong, and then describe a way around it: rather than fixing one scale and one sample, study the whole system of shadows as the scale shrinks and the sample fills out the space. Inverse-limit techniques from shape theory show the limiting projection is well behaved on homotopy and homology under mild hypotheses, and in some favorable cases the limit stabilizes and recovers the shape up to its embedding in the ambient space. Joint work with Kazuhiro Kawamura and Sushovan Majhi.">
+          <span class="event-label label-plenary">Plenary</span>
+          <div class="event-speaker">Atish Mitra</div>
+          <div class="event-title">Recovering Shapes from Their Shadows</div>
+          <span class="room-tag">Wilson 1-132</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /sunday -->
+
+  <!-- Legend
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-dot" style="background: var(--plenary);"></div>
+      Plenary
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background: var(--early-career);"></div>
+      Expository
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background: var(--grad-talk);"></div>
+      Graduate Talks
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background: var(--social);"></div>
+      Social / Poster
+    </div>
+  </div>
+  -->
+
+</div><!-- /schedule-container -->
+
+<!-- ══════════ MODAL ══════════ -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-card" id="modal-card">
+    <div class="modal-header">
+      <button class="modal-close" id="modal-close" aria-label="Close">✕</button>
+      <div class="modal-header-row">
+        <div class="modal-type-badge" id="modal-badge">Plenary</div>
+        <div class="modal-meta modal-meta-top">
+          <span class="modal-meta-item" id="modal-room-item">
+            <span class="modal-meta-icon">📍</span>
+            <span id="modal-room-text">Room</span>
+          </span>
+          <span class="modal-meta-item" id="modal-time-item">
+            <span class="modal-meta-icon">🕐</span>
+            <span id="modal-time-text">Time</span>
+          </span>
+        </div>
+      </div>
+      <div class="modal-title" id="modal-title">Talk Title</div>
+      <div class="modal-meta">
+        <span class="modal-meta-item" id="modal-speaker-item" hidden>
+          <span class="modal-meta-icon">👤</span>
+          <span id="modal-speaker-text">Speaker</span>
+        </span>
+        <span class="modal-meta-item" id="modal-institution-item" hidden>
+          <span class="modal-meta-icon">🏛️</span>
+          <span id="modal-institution-text">Institution</span>
+        </span>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-abstract-label">Abstract</div>
+      <div id="modal-abstract-content"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function renderLatex(root) {
+    if (!root || typeof window.renderMathInElement !== 'function') return;
+    window.renderMathInElement(root, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+      ],
+      throwOnError: false,
+      strict: 'ignore',
+    });
+  }
+
+  // ── Modal logic ──
+  const overlay = document.getElementById('modal-overlay');
+  const card = document.getElementById('modal-card');
+  const badgeEl = document.getElementById('modal-badge');
+  const titleEl = document.getElementById('modal-title');
+  const speakerItem = document.getElementById('modal-speaker-item');
+  const speakerEl = document.getElementById('modal-speaker-text');
+  const institutionEl = document.getElementById('modal-institution-text');
+  const institutionItem = document.getElementById('modal-institution-item');
+  const timeEl = document.getElementById('modal-time-text');
+  const roomEl = document.getElementById('modal-room-text');
+  const abstractEl = document.getElementById('modal-abstract-content');
+
+  const badgeLabels = { plenary: 'Plenary', early: 'Expository', grad: 'Original Research', registration: 'Registration' };
+
+  function openModal(el) {
+    const d = el.dataset;
+    const type = d.type || 'grad';
+
+    badgeEl.textContent = badgeLabels[type] || type;
+    badgeEl.className = 'modal-type-badge ' + type;
+    titleEl.textContent = d.title || '';
+    const speaker = (d.speaker || '').trim();
+    if (speaker) {
+      speakerEl.textContent = speaker;
+      speakerItem.hidden = false;
+    } else {
+      speakerItem.hidden = true;
+    }
+    const institution = (d.institution || '').trim();
+    if (institution) {
+      institutionEl.textContent = institution;
+      institutionItem.hidden = false;
+    } else {
+      institutionItem.hidden = true;
+    }
+    timeEl.textContent = d.time || '';
+    roomEl.textContent = d.room || '';
+
+    const abstract = (d.abstract || '').trim();
+    if (abstract) {
+      if (abstract.startsWith('<')) {
+        abstractEl.innerHTML = abstract;
+      } else {
+        abstractEl.innerHTML = '<p class="modal-abstract">' + abstract + '</p>';
+      }
+    } else {
+      abstractEl.innerHTML = '<p class="modal-no-abstract">Abstract not yet available.</p>';
+    }
+
+    renderLatex(titleEl);
+    renderLatex(abstractEl);
+
+    overlay.classList.add('active');
+
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close button
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+
+  // Click outside card to close
+  overlay.addEventListener('click', (e) => {
+    if (!card.contains(e.target)) closeModal();
+  });
+
+  // Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ── Iframe height fix for Google Sites ──
+  // Body uses flexbox centering so shorter days (Fri/Sun) appear
+  // vertically centered in the iframe rather than pinned to top.
+
+  // Tab switching
+  const switchTab = (tab) => {
+    document.querySelectorAll('.tab').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected', 'false');
+    });
+    document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected', 'true');
+    document.getElementById(tab.dataset.day).classList.add('active');
+  };
+
+  // Bind tabs
+  document.querySelectorAll('.tab').forEach(tab => {
+    const newTab = tab.cloneNode(true);
+    tab.parentNode.replaceChild(newTab, tab);
+    newTab.addEventListener('click', () => switchTab(newTab));
+  });
+
+  // Support direct links like ?day=saturday&print=1 for printing/export.
+  const params = new URLSearchParams(window.location.search);
+  const dayParam = (params.get('day') || '').toLowerCase();
+  const printParam = params.get('print');
+
+  if (printParam === '1') {
+    document.documentElement.classList.add('print-mode');
+  }
+
+  if (dayParam) {
+    const requestedTab = document.querySelector('.tab[data-day="' + dayParam + '"]');
+    if (requestedTab) {
+      switchTab(requestedTab);
+    }
+  }
+
+  // Re-bind clickable events after tab clone; inject institution label into each cell
+  document.querySelectorAll('.event.clickable').forEach(ev => {
+    ev.addEventListener('click', () => openModal(ev));
+    const institution = (ev.dataset.institution || '').trim();
+    if (institution && !ev.querySelector('.event-institution')) {
+      const el = document.createElement('div');
+      el.className = 'event-institution';
+      el.textContent = institution;
+      const title = ev.querySelector('.event-title');
+      if (title) {
+        ev.insertBefore(el, title);
+      } else {
+        ev.appendChild(el);
+      }
+    }
+  });
+
+  // Render math in cards/titles after deferred KaTeX scripts are ready.
+  window.addEventListener('load', () => {
+    renderLatex(document.querySelector('.schedule-container'));
+  });
+
+  // ── Dark mode toggle ──
+  const toggle = document.getElementById('theme-toggle');
+  let savedPref = null;
+  try { savedPref = localStorage.getItem('gstgc-dark'); } catch(e) {}
+
+  // Check for saved preference or OS default
+  if (savedPref === 'true') {
+    document.documentElement.classList.add('dark');
+  }
+
+  toggle.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    const isDark = document.documentElement.classList.contains('dark');
+    try { localStorage.setItem('gstgc-dark', isDark); } catch(e) {}
+  });
+</script>
+
+</body>
+</html>
